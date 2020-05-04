@@ -1,4 +1,4 @@
-const bcrpyt = require('bcrpyt')
+const bcrypt = require('bcrypt')
 const db = require('../db/models')
 const {getRole} = require('../tools/database')
 
