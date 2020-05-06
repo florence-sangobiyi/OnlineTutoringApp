@@ -12,6 +12,8 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'category_id',
       onDelete: 'CASCADE'
     })
+    Subject.belongsToMany(models.User, {through: 'User_Subjects'})
+    Subject.belongsToMany(models.Lesson, {through: 'Lessons_Subjects'})
   };
   return Subject;
 };
