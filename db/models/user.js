@@ -30,6 +30,9 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'role_id',
       onDelete: 'CASCADE'
     })
+    User.belongsToMany(models.Subject, {through: 'User_Subjects'})
+    User.hasMany(models.Lesson, {as: 'Student', foreignKey: 'student_id'})
+    User.hasMany(models.Lesson, {as: 'Tutor', foreignKey: 'tutor_id'})
   };
   return User;
 };

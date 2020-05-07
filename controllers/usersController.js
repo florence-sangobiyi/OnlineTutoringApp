@@ -23,6 +23,7 @@ const users = {
         bcrypt.compare(req.body.password, user.password, (error, result) => {
           if (result) {
             const token = jwt.sign({
+              id: user.id,
               firstName: user.firstName, 
               email: user.email,
               role_id: user.role_id
