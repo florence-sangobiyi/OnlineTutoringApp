@@ -10,6 +10,8 @@ const permissions = {
       const user = jwt.verify(userToken, process.env.SECRET)
 
       if (user) {
+        req.decoded = user
+
         next()
       } else {
         res.status(401).send({data: 'please provide an authentication token'})
@@ -25,6 +27,8 @@ const permissions = {
       const user = jwt.verify(userToken, process.env.SECRET)
 
       if(user && user.role_id === 1) {
+        req.decoded = user
+
         next()
       } else {
         res.status(401).send({data: 'please provide an authentication token'})
@@ -40,6 +44,8 @@ const permissions = {
       const user = jwt.verify(userToken, process.env.SECRET)
 
       if(user && user.role_id === 2) {
+        req.decoded = user
+
         next()
       } else {
         res.status(401).send({data: 'please provide an authentication token'})

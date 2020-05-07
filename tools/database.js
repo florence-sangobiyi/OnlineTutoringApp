@@ -9,7 +9,7 @@ const getRole = async (roleName) => {
 const getRecord = async (id, model) => {
     const record =  await model.findByPk(id)
 
-    return record.get({plain: true})
+    return record && record.get({plain: true})
 }
 
 module.exports = {getRole, getRecord}

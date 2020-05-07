@@ -8,4 +8,8 @@ router.route('/:id')
   .patch(permissions.isAdmin, lessons.update)
   .delete(permissions.isAdmin, lessons.delete)
 
+router.route('/')
+  .post(permissions.isAuthenticated, lessons.create)
+  .get(permissions.isAdmin, lessons.index)
+
 module.exports = router

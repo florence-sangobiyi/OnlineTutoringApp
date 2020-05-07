@@ -31,8 +31,8 @@ module.exports = (sequelize, DataTypes) => {
       onDelete: 'CASCADE'
     })
     User.belongsToMany(models.Subject, {through: 'User_Subjects'})
-    User.hasMany(models.Lesson, {as: 'Student'})
-    User.hasMany(models.Lesson, {as: 'Tutor'})
+    User.hasMany(models.Lesson, {as: 'Student', foreignKey: 'student_id'})
+    User.hasMany(models.Lesson, {as: 'Tutor', foreignKey: 'tutor_id'})
   };
   return User;
 };
