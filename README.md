@@ -1,69 +1,92 @@
-ONLINE-TUTORING-APP
+# ONLINE-TUTORING-APP
 
-Simple tutoring app using api
+Simple tutoring app RESTful API
 
-Prerequisite
-NodeJS
-Sequelize CLI
-Express
+## Prerequisite
+- NodeJS
+- Sequelize CLI
+- Express
 
-Installation
-Clone this repository
-Add .env file as described in .env.example
-Install packages with $ npm install
-Migrate database with $ sequelize db:migrate
+## Installation
+- Clone this repository
+- Add .env file as described in .env.example
+- Install packages with $ npm install
+- Migrate database with $ sequelize db:migrate
 
-Usage
-Start development environment with $ npm run start:dev
-If you would like to use production build instead
-Generate production build with $ npm run build
-Copy sequelize config with $ npm run config
-Start application with $ npm start
-
-Testing
-Migrate test database with $ NODE_ENV=test sequelize db:migrate
-Run Tests with $ npm test
-
-Endpoints
-Roles
-GET /api/v1/users
-GET /api/v1/categories
-PUT /api/v1/roles/:id
-DELETE /api/v1/roles/:id
+## Usage
+- Start development environment with $ npm run start:dev
+- Start application with $ npm start
 
 
-Users
-GET /api/v1/users, /api/v1/users/:id
-POST /api/v1/users
-GET /api/v1/subjects
-GET /api/v1/lessons
-POST api/v1/users/sign-in
+## Endpoints
+For Authenticated request i.e request for admins and authenticated user, your request should have an authorization of the format `Authorization: JWT_token`. JWT_token is issued when user successfully login.
+
+### Categories
+- POST /api/v1/categories - Allow admins create a new category
+  - Sample request body
+    ```json
+      {
+        "name": "primary"
+      }
+    ```
+- POST /api/v1/categories/:id/subjects
+  - Sample request body
+    ```json
+      {
+        "name": "Mathematics"
+      }
+    ```
+- GET /api/v1/categories - Returns all categories to authenticaticated users
+- GET /api/v1/categories/:id/subjects - Returns all subjects in a specified category to authenticated user
 
 
- i. Sample login request body
+### Users
+- POST api/v1/users/sign-in
+    - Sample login request body
+      ```json
+      {
+        "email": "alexander@hamilton.com",
+        "password": "revolution"
+      }
+      ```
+
+- POST api/v1/users/sign-up
+    - Sample signup request body
+      ```json
+      {
+        "email": "alexander@hamilton.com",
+        "firstName": "Alexamder",
+        "lastName": "Hamilton",
+        "password": "revolution",
+        "role": "tutor"
+      }
+      ```
+
+### Lessons
+- GET /api/v1/lessons - Allows admin users to fetch all lessons
+- POST /api/v1/lessons - Allows authenticated user to book a lesson
+    - Sample lesson booking request
+    ```json
+    {
+      "name": "JAMB preparatory",
+      "tutor_id": 2
+    }
+    ```
+- PATCH /api/v1/lessons/:id - Allow admins to update a lesson
+   - Sample lesson update request
+   ```json
+   {
+     "name": "Extra curricular classes"
+   }
+   ```
+- DELETE /api/v1/lessons/:id - Allow admins to delete specified lesson
+
+### Subjects
+- PATCH /api/v1/subjects/:id - Allow admins to update subject
+  - Sample request body
+  ```json
   {
-    "email": "alexander@hamilton.com",
-    "password": "revolution"
+    "name": "Fine Art"
   }
- ii. Sample signup request body
-  {
-    "username": "ahamilton",
-    "email": "alexander@hamilton.com",
-    "firstName": "Alexamder",
-    "lastName": "Hamilton",
-    "password": "revolution",
-    "RoleId": 12
-  }
-
-PUT /api/users/:id
- i. Sample request body
-  {
-    "firstName": "Alex",
-    "RoleId": 1
-  }
-DELETE /api/users/:id
-
-POST api/v1/users/sign-in
-
-
-
+  ```
+- DELETE /api/v1/lessons/:id - Allow admins to delete specified lesson
